@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VACO: Vertex-Aligned Decoding for Dense Hand Contact Estimation</title>
+<meta name="description" content="VACO: Vertex-Aligned Decoding for Dense Hand Contact Estimation from a Single Image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #14161a;
+    --body: #3c4048;
+    --muted: #7a808a;
+    --rule: #e8eaee;
+    --accent: #1f5eff;
+    --page: 880px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: #ffffff;
+    color: var(--body);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    padding: 76px 0 8px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(1.75rem, 4.2vw, 2.65rem);
+    font-weight: 650;
+    line-height: 1.28;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  .hero .venue {
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- link buttons ---------- */
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 34px 0 8px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(20, 22, 26, 0.18);
+    transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .btn svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    fill: currentColor;
+  }
+
+  .btn:hover,
+  .btn:focus-visible {
+    background: #2c313a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(20, 22, 26, 0.22);
+  }
+
+  .btn:active { transform: translateY(0); }
+
+  /* ---------- teaser ---------- */
+  .teaser {
+    margin: 52px auto 0;
+    text-align: center;
+  }
+
+  .teaser img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+    box-shadow: 0 2px 18px rgba(20, 22, 26, 0.07);
+  }
+
+  .teaser figcaption {
+    margin: 16px auto 0;
+    max-width: 740px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    text-align: left;
+  }
+
+  /* ---------- sections ---------- */
+  section { margin-top: 66px; }
+
+  section h2 {
+    margin: 0 0 20px;
+    color: var(--ink);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  section p {
+    margin: 0 0 1em;
+    text-align: left;
+  }
+
+  .abstract p {
+    color: var(--body);
+    line-height: 1.88;
+  }
+
+  .abstract strong { color: var(--ink); font-weight: 600; }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 72px 0 0;
+  }
+
+  footer {
+    padding: 26px 0 64px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  footer a { color: inherit; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .hero { padding-top: 48px; }
+    .links { gap: 10px; }
+    .btn { padding: 9px 18px; font-size: 0.9rem; }
+    section { margin-top: 52px; }
+    .teaser { margin-top: 38px; }
+    .teaser figcaption { font-size: 0.85rem; }
+  }
+</style>
+</head>
+
+<body>
+
+<main class="wrap">
+
+  <!-- ================= hero ================= -->
+  <header class="hero">
+    <h1>VACO: Vertex-Aligned Decoding for Dense Hand Contact Estimation from a Single Image</h1>
+    <p class="venue">(under review)</p>
+
+    <!--
+    <p class="authors">
+      <a href="#">Author One</a>,
+      <a href="#">Author Two</a>,
+      <a href="#">Author Three</a>
+    </p>
+    <p class="affiliation">Your Institution</p>
+    -->
+
+    <!-- ================= buttons ================= -->
+    <!-- TODO: all three buttons currently point to https://vaco-contact.github.io.
+         Replace each href with the real Paper / arXiv / Code URL once available
+         (see README.md). -->
+    <nav class="links" aria-label="Paper links">
+      <a class="btn" href="https://vaco-contact.github.io" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2.5L18.5 9H14V4.5zM8 13h8v1.8H8V13zm0 4h8v1.8H8V17zm0-8h3v1.8H8V9z"/></svg>
+        Paper
+      </a>
+
+      <a class="btn" href="https://vaco-contact.github.io" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H6v11h11v-5h2v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>
+        arXiv
+      </a>
+
+      <a class="btn" href="https://vaco-contact.github.io" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+        Code
+      </a>
+    </nav>
+  </header>
+
+  <!-- ================= teaser ================= -->
+  <figure class="teaser">
+    <img src="./static/images/teaser.png"
+         alt="Teaser: comparison of reconstruction-based contact estimation, shared-query direct prediction, and VACO's vertex-aligned decoding.">
+    <figcaption>
+      <strong>Dense hand contact paradigms.</strong>
+      (a) Geometric proximity after reconstruction.
+      (b) Shared-query direct prediction.
+      (c) VACO samples image evidence at each projected vertex.
+    </figcaption>
+  </figure>
+
+  <!-- ================= abstract ================= -->
+  <section class="abstract" id="abstract">
+    <h2>Abstract</h2>
+    <p>
+      Dense hand contact estimation from a single RGB image is a foundational primitive for
+      dexterous manipulation and 3D interaction analysis. Direct predictors typically decode
+      the entire per-vertex contact map from one shared query, leaving individual vertices
+      ungrounded in the image and smearing contact across adjacent, non-touching surfaces.
+      We present <strong>VACO</strong>, a vertex-aligned decoder in which each MANO vertex
+      samples local image features at its projected location. A hand-reconstruction backbone,
+      jointly trained for reconstruction and contact, predicts these locations at inference
+      without an auxiliary reconstructor. Training uses noise-perturbed ground-truth
+      projections and end-to-end feature adaptation to improve robustness and contact-sensitive
+      features. A single VACO checkpoint sets a new state of the art on five benchmarks
+      spanning hand&ndash;object, hand&ndash;human, hand&ndash;scene, and bimanual interactions.
+      It improves F1 by <strong>+20.7&nbsp;pp</strong> over the strongest prior direct predictor
+      on Hi4D and generalizes to the held-out HOT3D and HOCap, with gains of
+      <strong>+5.5</strong> and <strong>+2.7&nbsp;pp</strong>. The resulting contact predictions
+      also improve downstream HOI reconstruction.
+    </p>
+  </section>
+
+  <hr>
+
+  <footer>
+    Page layout adapted from the
+    <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>
+    project page template.
+  </footer>
+
+</main>
+
+</body>
+</html>
