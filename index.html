@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VACO: Vertex-Aligned Decoding for Dense Hand Contact Estimation</title>
 <meta name="description" content="VACO: Vertex-Aligned Decoding for Dense Hand Contact Estimation from a Single Image">
+<meta property="og:title" content="VACO: Vertex-Aligned Decoding for Dense Hand Contact Estimation">
+<meta property="og:description" content="Every MANO vertex reads the image under its own projection. State of the art on five contact benchmarks with a single checkpoint.">
+<meta property="og:image" content="./static/images/teaser.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,13 +19,14 @@
     --body: #3c4048;
     --muted: #7a808a;
     --rule: #e8eaee;
-    --accent: #1f5eff;
+    --soft: #f7f9fc;
+    --accent: #2b5cff;
     --page: 880px;
   }
 
   * { box-sizing: border-box; }
 
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
   body {
     margin: 0;
@@ -43,26 +47,64 @@
 
   /* ---------- hero ---------- */
   .hero {
-    padding: 76px 0 8px;
+    padding: 76px 0 0;
     text-align: center;
   }
 
   .hero h1 {
     margin: 0;
     color: var(--ink);
-    font-size: clamp(1.75rem, 4.2vw, 2.65rem);
+    font-size: clamp(1.75rem, 4.2vw, 2.6rem);
     font-weight: 650;
     line-height: 1.28;
     letter-spacing: -0.022em;
     text-wrap: balance;
   }
 
+  .authors {
+    margin: 26px 0 0;
+    color: var(--ink);
+    font-size: 1.04rem;
+    line-height: 1.7;
+  }
+
+  .authors sup {
+    font-size: 0.62em;
+    vertical-align: 0.45em;
+    margin-left: 1px;
+  }
+
+  .affiliation {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  .affiliation sup { font-size: 0.68em; vertical-align: 0.4em; }
+
+  .contrib {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
   .hero .venue {
-    margin: 18px 0 0;
+    margin: 20px 0 0;
     color: var(--muted);
     font-size: 1rem;
     letter-spacing: 0.02em;
   }
+
+  .tldr {
+    margin: 22px auto 0;
+    max-width: 700px;
+    font-size: 0.98rem;
+    line-height: 1.72;
+    color: var(--body);
+  }
+
+  .tldr strong { color: var(--ink); font-weight: 600; }
 
   /* ---------- link buttons ---------- */
   .links {
@@ -70,7 +112,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
-    margin: 34px 0 8px;
+    margin: 30px 0 0;
   }
 
   .btn {
@@ -89,12 +131,7 @@
     transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
   }
 
-  .btn svg {
-    width: 16px;
-    height: 16px;
-    flex: none;
-    fill: currentColor;
-  }
+  .btn svg { width: 16px; height: 16px; flex: none; fill: currentColor; }
 
   .btn:hover,
   .btn:focus-visible {
@@ -105,13 +142,28 @@
 
   .btn:active { transform: translateY(0); }
 
-  /* ---------- teaser ---------- */
-  .teaser {
-    margin: 52px auto 0;
-    text-align: center;
+  /* non-interactive "coming soon" variant */
+  .btn.is-soon {
+    background: #fff;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    box-shadow: none;
+    cursor: default;
   }
 
-  .teaser img {
+  .btn.is-soon:hover,
+  .btn.is-soon:focus-visible {
+    background: #fff;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn .soon { margin-left: 3px; font-size: 0.8rem; color: #9aa0aa; }
+
+  /* ---------- figures ---------- */
+  .figure { margin: 52px auto 0; text-align: center; }
+
+  .figure img {
     display: block;
     width: 100%;
     height: auto;
@@ -120,48 +172,150 @@
     box-shadow: 0 2px 18px rgba(20, 22, 26, 0.07);
   }
 
-  .teaser figcaption {
+  .figure figcaption {
     margin: 16px auto 0;
-    max-width: 740px;
+    max-width: 760px;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     line-height: 1.65;
     text-align: left;
   }
 
+  .figure figcaption strong { color: #5b616b; font-weight: 600; }
+
+  .figure + p { margin-top: 30px; }
+
   /* ---------- sections ---------- */
-  section { margin-top: 66px; }
+  section { margin-top: 72px; }
 
   section h2 {
-    margin: 0 0 20px;
+    margin: 0 0 18px;
     color: var(--ink);
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: -0.015em;
   }
 
-  section p {
-    margin: 0 0 1em;
-    text-align: left;
+  section h3 {
+    margin: 34px 0 10px;
+    color: var(--ink);
+    font-size: 1.05rem;
+    font-weight: 600;
   }
 
-  .abstract p {
-    color: var(--body);
-    line-height: 1.88;
-  }
+  section p { margin: 0 0 1em; text-align: left; }
+
+  .lead { color: var(--body); }
+
+  .abstract p { line-height: 1.88; }
 
   .abstract strong { color: var(--ink); font-weight: 600; }
 
+  ul.bullets {
+    margin: 4px 0 0;
+    padding-left: 20px;
+  }
+
+  ul.bullets li {
+    margin-bottom: 10px;
+    line-height: 1.7;
+  }
+
+  ul.bullets li strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- tables ---------- */
+  .table-wrap {
+    margin: 26px 0 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+  }
+
+  table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    line-height: 1.45;
+  }
+
+  thead th {
+    padding: 9px 6px;
+    background: var(--soft);
+    color: #4a505a;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  thead th .sub {
+    display: block;
+    margin-top: 1px;
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  tbody td {
+    padding: 8px 6px;
+    text-align: center;
+    border-bottom: 1px solid #f1f3f6;
+    white-space: nowrap;
+    color: #4a505a;
+  }
+
+  tbody tr:last-child td { border-bottom: 0; }
+
+  th:first-child, td:first-child {
+    text-align: left;
+    padding-left: 14px;
+    color: var(--ink);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  tbody tr.ours { background: #f4f8ff; }
+
+  tbody tr.ours td:first-child { font-weight: 600; }
+
+  td b { color: var(--ink); font-weight: 600; }
+
+  .table-note {
+    margin: 12px 0 0;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .table-hint { display: none; }
+
+  /* ---------- bibtex ---------- */
+  pre.bib {
+    margin: 18px 0 0;
+    padding: 16px 18px;
+    background: var(--soft);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: #3c4048;
+  }
+
+  /* ---------- misc ---------- */
   hr {
     border: 0;
     border-top: 1px solid var(--rule);
-    margin: 72px 0 0;
+    margin: 76px 0 0;
   }
 
   footer {
-    padding: 26px 0 64px;
+    padding: 24px 0 64px;
     color: var(--muted);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     line-height: 1.7;
     text-align: center;
   }
@@ -174,9 +328,11 @@
     .hero { padding-top: 48px; }
     .links { gap: 10px; }
     .btn { padding: 9px 18px; font-size: 0.9rem; }
-    section { margin-top: 52px; }
-    .teaser { margin-top: 38px; }
-    .teaser figcaption { font-size: 0.85rem; }
+    section { margin-top: 56px; }
+    .figure { margin-top: 40px; }
+    .figure figcaption { font-size: 0.84rem; }
+    .table-hint { display: block; margin: 8px 0 0; font-size: 0.76rem; color: var(--muted); }
+    pre.bib { white-space: pre-wrap; overflow-wrap: break-word; }
   }
 </style>
 </head>
@@ -188,50 +344,48 @@
   <!-- ================= hero ================= -->
   <header class="hero">
     <h1>VACO: Vertex-Aligned Decoding for Dense Hand Contact Estimation from a Single Image</h1>
-    <p class="venue">(under review)</p>
 
-    <!--
     <p class="authors">
-      <a href="#">Author One</a>,
-      <a href="#">Author Two</a>,
-      <a href="#">Author Three</a>
+      Binhong Ye<sup>1,*</sup>,
+      Jin-Chuan Shi<sup>1,*</sup>,
+      Tao Liu<sup>1</sup>,
+      Xin Wang<sup>1</sup>,
+      Hao Chen<sup>1,&dagger;</sup>,
+      Chunhua Shen<sup>1,2,&dagger;</sup>
     </p>
-    <p class="affiliation">Your Institution</p>
-    -->
+    <p class="affiliation">
+      <sup>1</sup>State Key Lab of CAD &amp; CG, Zhejiang University, China<br>
+      <sup>2</sup>Zhejiang University of Technology, China
+    </p>
+    <p class="contrib">* Equal contribution. &dagger; Corresponding author.</p>
 
-    <!-- ================= buttons ================= -->
-    <!-- TODO: all three buttons currently point to https://vaco-contact.github.io.
-         Replace each href with the real Paper / arXiv / Code URL once available
-         (see README.md). -->
+    <p class="venue">arXiv preprint</p>
+
+    <p class="tldr">
+      <strong>TL;DR</strong> &mdash; A shared contact query never learns where a vertex sits in the
+      image. VACO lets every MANO vertex read the pixels under its own projection, and still runs
+      as a single feed-forward pass.
+    </p>
+
+    <!-- TODO: Paper currently points at the arXiv PDF; swap in a camera-ready PDF when available.
+         The Code button is a non-interactive "coming soon" placeholder. -->
     <nav class="links" aria-label="Paper links">
-      <a class="btn" href="https://vaco-contact.github.io" target="_blank" rel="noopener">
+      <a class="btn" href="https://arxiv.org/pdf/2611.17755" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2.5L18.5 9H14V4.5zM8 13h8v1.8H8V13zm0 4h8v1.8H8V17zm0-8h3v1.8H8V9z"/></svg>
         Paper
       </a>
 
-      <a class="btn" href="https://vaco-contact.github.io" target="_blank" rel="noopener">
+      <a class="btn" href="https://arxiv.org/abs/2611.17755" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H6v11h11v-5h2v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>
         arXiv
       </a>
 
-      <a class="btn" href="https://vaco-contact.github.io" target="_blank" rel="noopener">
+      <span class="btn is-soon" aria-disabled="true">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
-        Code
-      </a>
+        Code<span class="soon">&middot; coming soon</span>
+      </span>
     </nav>
   </header>
-
-  <!-- ================= teaser ================= -->
-  <figure class="teaser">
-    <img src="./static/images/teaser.png"
-         alt="Teaser: comparison of reconstruction-based contact estimation, shared-query direct prediction, and VACO's vertex-aligned decoding.">
-    <figcaption>
-      <strong>Dense hand contact paradigms.</strong>
-      (a) Geometric proximity after reconstruction.
-      (b) Shared-query direct prediction.
-      (c) VACO samples image evidence at each projected vertex.
-    </figcaption>
-  </figure>
 
   <!-- ================= abstract ================= -->
   <section class="abstract" id="abstract">
@@ -255,10 +409,198 @@
     </p>
   </section>
 
+  <!-- ================= method ================= -->
+  <section id="method">
+    <h2>Method</h2>
+    <p class="lead">
+      VACO keeps the feed-forward speed of direct prediction and removes its structural blind
+      spot: instead of asking one query to imagine the whole hand, it asks every vertex to look
+      at the image where that vertex actually is.
+    </p>
+
+    <figure class="figure">
+      <img src="./static/images/pipeline.png"
+           alt="VACO pipeline: WiLoR backbone, multi-scale feature sampling at projected vertices, contact decoder, and downstream application.">
+      <figcaption>
+        <strong>VACO pipeline.</strong> A co-trained WiLoR backbone predicts MANO vertices and an
+        image feature pyramid. Multi-scale sampling at the vertex projections forms one contact
+        token per vertex; four decoder blocks combine mesh-wide self-attention with image
+        cross-attention before a shared per-vertex contact head.
+      </figcaption>
+    </figure>
+
+    <p>
+      Given a single RGB image, VACO predicts a binary contact label for each of the 778 MANO
+      vertices. A WiLoR backbone encodes the image into a feature pyramid and regresses the hand
+      mesh; projecting that mesh yields one query per vertex, anchored at its own pixel on the
+      image plane. A lightweight Transformer decoder turns these vertex-aligned queries into
+      contact probabilities, reading both the features under each vertex and the full image for
+      context.
+    </p>
+
+    <p>
+      Because a predicted mesh carries pose error, training samples at ground-truth projections
+      perturbed with image-plane Gaussian noise, and the shared backbone is optimized jointly for
+      contact and reconstruction. At inference, the predicted mesh replaces these training
+      projections.
+    </p>
+  </section>
+
+  <!-- ================= results ================= -->
+  <section id="results">
+    <h2>Results</h2>
+    <p class="lead">
+      One checkpoint, trained once on a unified 0.6M-frame pool, evaluated without any
+      per-benchmark fine-tuning. The first three datasets are in-domain; starred columns are held
+      out from training.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>DexYCB<span class="sub">Hand&ndash;Object</span></th>
+            <th>Hi4D<span class="sub">Hand&ndash;Human</span></th>
+            <th>RICH<span class="sub">Hand&ndash;Scene</span></th>
+            <th>HOT3D<sup>*</sup><span class="sub">Hand&ndash;Object</span></th>
+            <th>HOCap<sup>*</sup><span class="sub">Hand&ndash;Object</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DECO</td>
+            <td>.224 / .314 / .199</td>
+            <td>.390 / .394 / .343</td>
+            <td>.167 / .123 / .126</td>
+            <td>.211 / .352 / .205</td>
+            <td>.085 / .120 / .075</td>
+          </tr>
+          <tr>
+            <td>FollowMyHold<sup>&dagger;</sup></td>
+            <td>.228 / .521 / .245</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>.127 / .317 / .128</td>
+            <td>.132 / .512 / .180</td>
+          </tr>
+          <tr>
+            <td>HACO</td>
+            <td>.590 / .800 / .657</td>
+            <td>.668 / .709 / .653</td>
+            <td>.741 / .899 / .781</td>
+            <td>.502 / <b>.727</b> / .560</td>
+            <td>.351 / .775 / .461</td>
+          </tr>
+          <tr class="ours">
+            <td>VACO (ours)</td>
+            <td><b>.606 / .859 / .693</b></td>
+            <td><b>.811 / .943 / .860</b></td>
+            <td><b>.818 / .908 / .840</b></td>
+            <td><b>.579</b> / .723 / <b>.615</b></td>
+            <td><b>.367 / .842 / .488</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-hint">Swipe the table horizontally to see all datasets.</p>
+    <p class="table-note">
+      Each cell is precision / recall / F1 on the binary per-vertex contact mask under HACO's
+      proximity protocol. <sup>*</sup> held-out datasets. <sup>&dagger;</sup> FollowMyHold is
+      evaluated on 100 samples per split, at its reported thresholds; &ldquo;&mdash;&rdquo;
+      denotes settings where it is not applicable. Best per column in <b>bold</b>.
+    </p>
+
+    <h3>What the numbers say</h3>
+    <ul class="bullets">
+      <li><strong>In-domain:</strong> +3.6&nbsp;pp F1 on DexYCB, <strong>+20.7&nbsp;pp</strong> on
+          Hi4D and +5.9&nbsp;pp on RICH over HACO. The largest gain lands on heavily occluded
+          hand&ndash;human interaction, where cross-finger smearing hurts most.</li>
+      <li><strong>Held out:</strong> +5.5&nbsp;pp on HOT3D and +2.7&nbsp;pp on HOCap with no
+          fine-tuning, i.e. the gain survives unseen viewpoints and bimanual grasps.</li>
+    </ul>
+
+  </section>
+
+  <!-- ================= downstream ================= -->
+  <section id="downstream">
+    <h2>Downstream: Physically Grounded HOI Reconstruction</h2>
+    <p class="lead">
+      Contact is not only a prediction target. Thresholded at 0.52 and plugged into AGILE as an
+      SDF-based contact loss, predicted contact vertices are pulled toward the object surface from
+      both sides, leaving every other AGILE term untouched.
+    </p>
+
+    <figure class="figure">
+      <img src="./static/images/hoi.png"
+           alt="HOI reconstruction with and without the VACO contact prior, shown from four viewpoints.">
+      <figcaption>
+        <strong>Reconstruction with a contact prior.</strong> Left: input frames with VACO contact.
+        Right: AGILE without and with the contact prior, from four viewpoints. The prior yields a
+        tighter grasp with fewer floating-finger and interpenetration artefacts.
+      </figcaption>
+    </figure>
+
+    <div class="table-wrap">
+      <table style="min-width: 460px">
+        <thead>
+          <tr>
+            <th>HO3D-v3 (right hand)</th>
+            <th>CD (mm) &darr;</th>
+            <th>F@5 (%) &uarr;</th>
+            <th>F@10 (%) &uarr;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AGILE</td>
+            <td>23.11 &plusmn; 22.77</td>
+            <td>12.07 &plusmn; 8.15</td>
+            <td>30.43 &plusmn; 16.75</td>
+          </tr>
+          <tr>
+            <td>+ HACO contact</td>
+            <td>16.16 &plusmn; 9.39</td>
+            <td>13.96 &plusmn; 5.50</td>
+            <td>34.74 &plusmn; 12.71</td>
+          </tr>
+          <tr class="ours">
+            <td>+ VACO contact</td>
+            <td><b>12.46 &plusmn; 8.65</b></td>
+            <td><b>15.32 &plusmn; 4.79</b></td>
+            <td><b>37.87 &plusmn; 11.15</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">
+      Mean &plusmn; std over four HO3D-v3 test sequences held out from training (AP14, MPM13, SB11,
+      SM1); only AP14's object instance is unseen during training. Every row runs the same AGILE
+      pipeline and changes only the source of the contact mask; swapping in HACO's mask recovers
+      roughly 60% of the gain between AGILE and VACO.
+    </p>
+  </section>
+
+  <!-- ================= bibtex ================= -->
+  <section id="bibtex">
+    <h2>BibTeX</h2>
+    <!-- TODO: switch to the proceedings entry (booktitle, year) once the venue is final. -->
+    <pre class="bib">@article{vaco2026,
+  title   = {VACO: Vertex-Aligned Decoding for Dense Hand Contact
+             Estimation from a Single Image},
+  author  = {Ye, Binhong and Shi, Jin-Chuan and Liu, Tao
+             and Wang, Xin and Chen, Hao and Shen, Chunhua},
+  journal = {arXiv preprint arXiv:2611.17755},
+  year    = {2026}
+}</pre>
+  </section>
+
   <hr>
 
   <footer>
-    Page layout adapted from the
+    This page is licensed under a
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+    Layout adapted from the
     <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>
     project page template.
   </footer>
