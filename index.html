@@ -74,6 +74,17 @@
     margin-left: 1px;
   }
 
+  .authors a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .authors a:hover,
+  .authors a:focus-visible {
+    color: var(--accent);
+  }
+
   .affiliation {
     margin: 6px 0 0;
     color: var(--muted);
@@ -347,11 +358,11 @@
 
     <p class="authors">
       Binhong Ye<sup>1,*</sup>,
-      Jin-Chuan Shi<sup>1,*</sup>,
+      <a href="https://chuan-10.github.io/" target="_blank" rel="noopener">Jin-Chuan Shi</a><sup>1,*</sup>,
       Tao Liu<sup>1</sup>,
       Xin Wang<sup>1</sup>,
-      Hao Chen<sup>1,&dagger;</sup>,
-      Chunhua Shen<sup>1,2,&dagger;</sup>
+      <a href="https://stan-haochen.github.io/" target="_blank" rel="noopener">Hao Chen</a><sup>1,&dagger;</sup>,
+      <a href="https://cshen.github.io/" target="_blank" rel="noopener">Chunhua Shen</a><sup>1,2,&dagger;</sup>
     </p>
     <p class="affiliation">
       <sup>1</sup>State Key Lab of CAD &amp; CG, Zhejiang University, China<br>
